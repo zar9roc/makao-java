@@ -9,29 +9,40 @@ import java.util.Random;
 
 
 
-/**
- *
- * @author adam
- */
-
-
-
 public class Main {
     
-    Random random = new Random();
     
-    static public int[][] card = new int[3][12];
+    
+    //static public int[][] card = new int[3][12];
+    //static public boolean[][] cardDeck = new boolean[3][12];
     
     //liczbaGraczy
     static public int playersNum;
     static public int startingHand = 5;
+    static public int table;
+    static public int turnPlayer;
     
-    public class Player {
-        int id;
+    static public class Player {
+
         ArrayList<Integer> hand;
         boolean makao;
         boolean stoi;
-        int kolejki;
+        int tury;
+    }
+    
+    static public void Kolejka(Player gracze[], int turn) {
+        System.out.println("kolejka gracza: ");
+        
+        //ruch gracza
+        
+        
+        turn++;
+        
+        for(int i = playersNum; --i >= 0;) {
+            if (gracze[i].hand.isEmpty()) {
+                playersNum--;
+            }
+        }
     }
     
     public void AccumulateCharge(int val) {
@@ -91,28 +102,55 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        Random random = new Random();
         playersNum = Integer.parseInt(args[1]);
+        
+//        int colorRandom;
+//        int figureRandom;
+        
+        
         
         //populate cards matrix 
         
-        int k = 0;
-        for (int i = 3 ; i >= 0; i--) {
-            for (int j = 12; j>= 0; j--) {
-                card[i][j] = k++;
-            }
-        }
+//        int k = 0;
+//        for (int i = 3 ; i >= 0; i--) {
+//            for (int j = 12; j>= 0; j--) {
+//                card[i][j] = k++;
+//                //cardDeck[i][j] = true;
+//            }
+//        }
         
         //Utworzenie wektora graczy
             //utworzenie wektora ręki każdego gracza
         
-        ArrayList<Player> gracze;
+        Player gracze[] = new Player[playersNum];
+        
         
         //Rozdanie kart
         for(int i = playersNum; i >= 0; i--) {
-            
-            //t0d0 zrobić metodę przekazywującą dane do klasy
+            gracze[i] = new Player();
+            for (int j = 5; --j>=0; ) {
+                
+//                while(!cardDeck[colorRandom][figureRandom]) {
+//                    colorRandom = random.nextInt() % 4;
+//                    figureRandom = random.nextInt() % 13;
+//                }
+                
+                gracze[i].hand.add(random.nextInt() % 52);
+            }
         }
         
+        //Wybór startowej karty
+        table = random.nextInt() % 52;
+        while (table % 13 <= 3 || table % 13 >= 10) {
+            table = random.nextInt() % 52;
+        }
+        
+        
+        //cykl gry
+        while(playersNum >= 2) {
+            Kolejka(gracze, turnPlayer);
+        }
         
     }
 }
