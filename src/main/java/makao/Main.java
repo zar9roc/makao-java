@@ -1,75 +1,126 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+TODO:
+
+Zaprogramować ruch gracza
+    
+    użyć biblioteki wejścia, 
+    zinterpretować parametry wejścia
+Zaprogramować prawo kładzenia kart
+    Rzucanie wielu kart
+    Opcja Makao
+    Opcja PobórKarty
+    Naliczanie kary
+        Masowy pobór kart
+    Uniewinnienie/DamaNaWszystko
+    !Walet
+    AS
+    
+
+Napisać działanie kart
+
+Gra hotseat
+    dać imiona graczom
+Licznik tur
+
+*Gra sieciowa
+**AI
+
+*/
 package makao;
 import java.util.ArrayList;
 import java.util.Random;
 
 
 
+
 public class Main {
-    
-    
-    
-    //static public int[][] card = new int[3][12];
-    //static public boolean[][] cardDeck = new boolean[3][12];
     
     //liczbaGraczy
     static public int playersNum;
     static public int startingHand = 5;
     static public int table;
-    static public int turnPlayer;
+    static public int turnPlayer = 0;
     
     static public class Player {
 
         ArrayList<Integer> hand;
-        boolean makao;
-        boolean stoi;
-        int tury;
+        boolean makao = false;
+        boolean stoi = false;
+        int tury = 0;
+        boolean won = false;
+    }
+    
+    static public void Ruch(Player gracz) {
+        //wydrukuj rękę
+        System.out.println("Dostepne nastepujace karty:");
+        
+        for(int i = gracz.hand.size(); --i >= 0; ) {
+            System.out.println(gracz.hand.get(i) + " ");
+        }
+        if(gracz.stoi) {
+            gracz.tury--;
+            if(gracz.tury == 0) 
+                gracz.stoi = false;
+        } else {
+            int wybor;
+            //czekaj na wybor
+            wybor = 1;
+            Used(wybor);
+        }
+            
+        
+        //czy gracz ma kolejki: nie
+            //posłuchaj wyboru
+                //karta
+                    //(makao)
+                //pobór
+                    //+karta!
+                        //(makao)
+        //czy gracz ma kolejki: tak
+            //kolejka--
     }
     
     static public void Kolejka(Player gracze[], int turn) {
-        System.out.println("kolejka gracza: ");
+        System.out.println("kolejka gracza: " + turnPlayer);
         
         //ruch gracza
-        
+        Ruch(gracze[turnPlayer]);
         
         turn++;
         
         for(int i = playersNum; --i >= 0;) {
             if (gracze[i].hand.isEmpty()) {
                 playersNum--;
+                System.out.println("Gracz " + i + " pozbył się kart!");
             }
         }
     }
     
-    public void AccumulateCharge(int val) {
+    static public void AccumulateCharge(int val) {
         //accumulate 5 cards
     }
     
-    public void RestrictNextCard(int card) {
+    static public void RestrictNextCard(int card) {
         //figures or colors
     }
     
-    public void WarnFreeze() {
+    static public void WarnFreeze() {
         
     }
     
-    public void WarnStack() {
+    static public void WarnStack() {
         
     }
     
-    public void RequestFig() {
+    static public void RequestFig() {
         
     }
     
-    public void RequestColor() {
+    static public void RequestColor() {
         
     }
     
-    public void Used(int card) {
+    static public void Used(int card) {
         if(card == 11) {
           //queenHeart();
         } else {
@@ -105,21 +156,6 @@ public class Main {
         Random random = new Random();
         playersNum = Integer.parseInt(args[1]);
         
-//        int colorRandom;
-//        int figureRandom;
-        
-        
-        
-        //populate cards matrix 
-        
-//        int k = 0;
-//        for (int i = 3 ; i >= 0; i--) {
-//            for (int j = 12; j>= 0; j--) {
-//                card[i][j] = k++;
-//                //cardDeck[i][j] = true;
-//            }
-//        }
-        
         //Utworzenie wektora graczy
             //utworzenie wektora ręki każdego gracza
         
@@ -130,11 +166,6 @@ public class Main {
         for(int i = playersNum; i >= 0; i--) {
             gracze[i] = new Player();
             for (int j = 5; --j>=0; ) {
-                
-//                while(!cardDeck[colorRandom][figureRandom]) {
-//                    colorRandom = random.nextInt() % 4;
-//                    figureRandom = random.nextInt() % 13;
-//                }
                 
                 gracze[i].hand.add(random.nextInt() % 52);
             }
@@ -151,6 +182,10 @@ public class Main {
         while(playersNum >= 2) {
             Kolejka(gracze, turnPlayer);
         }
-        
+        for(int i = gracze.length; --i>=0; ) {
+            if(!gracze[i].won) {
+                System.out.println("Gracz " + i + " przegrał!");
+            }
+        }
     }
 }
