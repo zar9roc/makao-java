@@ -14,7 +14,7 @@ Zaprogramować prawo kładzenia kart
     Uniewinnienie/DamaNaWszystko
     !Walet
     AS
-    
+    Card interpretation, basic turn logic
 
 Napisać działanie kart
 
@@ -90,7 +90,8 @@ public class Main {
         
         for(int i = playersNum; --i >= 0;) {
             if (gracze[i].hand.isEmpty()) {
-                playersNum--;
+                gracze[i].won = true;
+                
                 System.out.println("Gracz " + i + " pozbył się kart!");
             }
         }
@@ -155,6 +156,7 @@ public class Main {
     public static void main(String[] args) {
         Random random = new Random();
         playersNum = Integer.parseInt(args[1]);
+        int inGame = playersNum;
         
         //Utworzenie wektora graczy
             //utworzenie wektora ręki każdego gracza
@@ -179,8 +181,17 @@ public class Main {
         
         
         //cykl gry
-        while(playersNum >= 2) {
+        
+        while(inGame >= 2) {
             Kolejka(gracze, turnPlayer);
+            
+            for(int i = playersNum; --i >= 0;) {
+                if(!gracze[i].won && gracze[i].hand.isEmpty()) {
+                    inGame--;
+                    gracze[i].won = true;
+                    System.out.println("Gracz " + i + " pozbył się kart!");
+                }
+            }
         }
         for(int i = gracze.length; --i>=0; ) {
             if(!gracze[i].won) {
