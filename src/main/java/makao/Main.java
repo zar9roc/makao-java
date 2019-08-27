@@ -61,7 +61,7 @@ public class Main {
     static public String cardName(int id) {
         String name = "xD";
         int color = id / 13;
-        int fig = id - (13 * color);
+        int fig = id % 13;
         
         switch(fig) {
             case 0:
