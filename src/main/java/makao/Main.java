@@ -1,6 +1,8 @@
 /*
 TODO:
 
+Tłumaczenie cyfr na wartości kart
+
 Zaprogramować ruch gracza
     
     użyć biblioteki wejścia, 
@@ -29,6 +31,9 @@ Licznik tur
 package makao;
 import java.util.ArrayList;
 import java.util.Random;
+//import java.io.IOException;
+import java.util.Scanner;
+
 
 
 
@@ -40,6 +45,9 @@ public class Main {
     static public int startingHand = 5;
     static public int table;
     static public int turnPlayer = 0;
+    static public Random random = new Random();
+    static public Scanner sc = new Scanner(System.in); //przerzucić do funkcji
+    
     
     static public class Player {
 
@@ -50,22 +58,107 @@ public class Main {
         boolean won = false;
     }
     
+    static public String cardName(int id) {
+        String name = "xD";
+        int color = id / 13;
+        int fig = id - (13 * color);
+        
+        switch(fig) {
+            case 0:
+                name = "A";
+                break;
+            case 1:
+                name = "2";
+                break;
+            case 2:
+                name = "3";
+                break;
+            case 3:
+                name = "4";
+                break;
+            case 4:
+                name = "5";
+                break;
+            case 5:
+                name = "6";
+                break;
+            case 6:    
+                name = "7";
+                break;
+            case 7:
+                name = "8";
+                break;
+            case 8:
+                name = "9";
+                break;
+            case 9:
+                name = "10";
+                break;
+            case 10:
+                name = "J";
+                break;
+            case 11:
+                name = "Q";
+                break;
+            case 12:
+                name = "K";
+                break;
+        }
+        
+        switch(color) {
+            case 0:
+                name = name.concat("heart");
+                break;
+            case 1:
+                name = name.concat("pillow");
+                break;
+            case 2: 
+                name = name.concat("trefl");
+                break;
+            case 3: 
+                name = name.concat("spade");
+                break;
+        }
+        
+        
+        return name;
+    }
+    
+    static public int Interpretuj(String in) {
+        int out = 0;
+        //todo: interpretacja wybranej karty, oraz ew makała lub poboru karty
+            //np 10 karta z makaem to "10m"
+            //zwraca wartosc -10 (generalnie ujemną za makao)
+            //lub
+            //pobor karty to "p"
+            //zwraca wartosc 0
+            
+        
+        return out;
+    }
+    
     static public void Ruch(Player gracz) {
         //wydrukuj rękę
         System.out.println("Dostepne nastepujace karty:");
         
         for(int i = gracz.hand.size(); --i >= 0; ) {
-            System.out.println(gracz.hand.get(i) + " ");
+            System.out.println(cardName(i) + " ");
         }
         if(gracz.stoi) {
             gracz.tury--;
             if(gracz.tury == 0) 
                 gracz.stoi = false;
         } else {
-            int wybor;
+            int wybor = 0;
+            //wybor = System.in.read();
             //czekaj na wybor
-            wybor = 1;
-            Used(wybor);
+            System.out.println("");
+            
+            String userInput =  sc.nextLine();
+            
+            wybor = Interpretuj(userInput);
+            
+            Used(wybor - 48);
         }
             
         
@@ -76,25 +169,14 @@ public class Main {
                 //pobór
                     //+karta!
                         //(makao)
-        //czy gracz ma kolejki: tak
-            //kolejka--
     }
     
-    static public void Kolejka(Player gracze[], int turn) {
+    static public void Kolejka(Player gracze[]) {
         System.out.println("kolejka gracza: " + turnPlayer);
         
         //ruch gracza
         Ruch(gracze[turnPlayer]);
-        
-        turn++;
-        
-        for(int i = playersNum; --i >= 0;) {
-            if (gracze[i].hand.isEmpty()) {
-                gracze[i].won = true;
-                
-                System.out.println("Gracz " + i + " pozbył się kart!");
-            }
-        }
+
     }
     
     static public void AccumulateCharge(int val) {
@@ -154,9 +236,9 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Random random = new Random();
-        playersNum = Integer.parseInt(args[1]);
-        int inGame = playersNum;
+        
+        
+        int inGame = playersNum = 4;
         
         //Utworzenie wektora graczy
             //utworzenie wektora ręki każdego gracza
@@ -165,10 +247,11 @@ public class Main {
         
         
         //Rozdanie kart
-        for(int i = playersNum; i >= 0; i--) {
+        for(int i = playersNum; --i >= 0; ) {
             gracze[i] = new Player();
+            gracze[i].hand = new ArrayList<Integer>();
+            
             for (int j = 5; --j>=0; ) {
-                
                 gracze[i].hand.add(random.nextInt() % 52);
             }
         }
@@ -177,13 +260,14 @@ public class Main {
         table = random.nextInt() % 52;
         while (table % 13 <= 3 || table % 13 >= 10) {
             table = random.nextInt() % 52;
+            System.out.println("Na stoliku stoi " + cardName(table));
         }
         
         
         //cykl gry
         
         while(inGame >= 2) {
-            Kolejka(gracze, turnPlayer);
+            Kolejka(gracze);
             
             for(int i = playersNum; --i >= 0;) {
                 if(!gracze[i].won && gracze[i].hand.isEmpty()) {
