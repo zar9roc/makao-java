@@ -53,76 +53,11 @@ public class Main {
 
         ArrayList<Integer> hand;
         boolean makao = false;
-        boolean stoi = false;
         int tury = 0;
         boolean won = false;
     }
     
-    static public String cardName(int id) {
-        String name = "xD";
-        int color = id / 13;
-        int fig = id % 13;
-        
-        switch(fig) {
-            case 0:
-                name = "A";
-                break;
-            case 1:
-                name = "2";
-                break;
-            case 2:
-                name = "3";
-                break;
-            case 3:
-                name = "4";
-                break;
-            case 4:
-                name = "5";
-                break;
-            case 5:
-                name = "6";
-                break;
-            case 6:    
-                name = "7";
-                break;
-            case 7:
-                name = "8";
-                break;
-            case 8:
-                name = "9";
-                break;
-            case 9:
-                name = "10";
-                break;
-            case 10:
-                name = "J";
-                break;
-            case 11:
-                name = "Q";
-                break;
-            case 12:
-                name = "K";
-                break;
-        }
-        
-        switch(color) {
-            case 0:
-                name = name.concat("heart");
-                break;
-            case 1:
-                name = name.concat("pillow");
-                break;
-            case 2: 
-                name = name.concat("trefl");
-                break;
-            case 3: 
-                name = name.concat("spade");
-                break;
-        }
-        
-        
-        return name;
-    }
+
     
     static public int Interpretuj(String in) {
         int out = 0;
@@ -142,12 +77,14 @@ public class Main {
         System.out.println("Dostepne nastepujace karty:");
         
         for(int i = gracz.hand.size(); --i >= 0; ) {
-            System.out.println(cardName(i) + " ");
+            System.out.print(card.cardName(i) + " ");
         }
-        if(gracz.stoi) {
+        
+        System.out.println();
+        
+        if(gracz.tury > 0) {
             gracz.tury--;
-            if(gracz.tury == 0) 
-                gracz.stoi = false;
+
         } else {
             int wybor = 0;
             //wybor = System.in.read();
@@ -158,7 +95,8 @@ public class Main {
             
             wybor = Interpretuj(userInput);
             
-            Used(wybor - 48);
+            Used(wybor);
+            
         }
             
         
@@ -237,7 +175,6 @@ public class Main {
 
     public static void main(String[] args) {
         
-        
         int inGame = playersNum = 4;
         
         //Utworzenie wektora graczy
@@ -249,7 +186,7 @@ public class Main {
         //Rozdanie kart
         for(int i = playersNum; --i >= 0; ) {
             gracze[i] = new Player();
-            gracze[i].hand = new ArrayList<Integer>();
+            gracze[i].hand = new ArrayList<>();
             
             for (int j = 5; --j>=0; ) {
                 gracze[i].hand.add(random.nextInt() % 52);
@@ -260,7 +197,7 @@ public class Main {
         table = random.nextInt() % 52;
         while (table % 13 <= 3 || table % 13 >= 10) {
             table = random.nextInt() % 52;
-            System.out.println("Na stoliku stoi " + cardName(table));
+            System.out.println("Na stoliku stoi " + card.cardName(table));
         }
         
         

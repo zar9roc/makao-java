@@ -1,0 +1,10 @@
+Pokój:
+    Ludzie: mogą trzymać karty, rzucać karty, patrzyć w karty, pobierać karty, wygrywać
+    Stół: można położyć i wziąć z niego karty, ma 2 stosy, karty położone i karty zakryte
+        Karty: jest ich nieskończoność, można je dobierać
+            karta:można rzucić, wziąć do ręki. Ma kolor i figurę
+                dama
+                król //działa tak a tak
+                jopek
+                itd.
+                
