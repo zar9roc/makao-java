@@ -29,7 +29,7 @@ Licznik tur
 
 */
 package makao;
-import java.util.ArrayList;
+
 import java.util.Random;
 //import java.io.IOException;
 import java.util.Scanner;
@@ -51,14 +51,6 @@ public class Main {
         
         player.setStartingHand(5);
         player.setPlayersNum(4);
-        
-        //Wybór startowej karty
-        stack = random.nextInt() % 52;
-        while (stack % 13 <= 3 || stack % 13 >= 10) {
-            stack = random.nextInt() % 52;
-            System.out.println("Na stoliku stoi " + card.getCardName(stack));
-        }
-        
         game.playGame();
 
     }
