@@ -39,10 +39,7 @@ import java.util.Scanner;
 
 
 public class Main {
-    
-    static public int playersNum;
-    static public int stack;
-    static public int turnPlayer = 0;
+   
     static public Random random = new Random();
     static public Scanner sc = new Scanner(System.in); 
 
