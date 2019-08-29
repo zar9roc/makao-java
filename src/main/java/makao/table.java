@@ -14,6 +14,7 @@ public class table {
     
     public static void setStackCard() {
         stack = Main.random.nextInt() % 52;
+        System.out.println("Na startowa karte wylosowano: " + card.getCardName(stack));
     }
     
     public static void setStackCard(int playerCard) {

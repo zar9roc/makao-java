@@ -10,7 +10,6 @@ package makao;
  * @author adam
  */
 public class game {
-    private static int playersInGame;
     private static int turnPlayer;
     
     private static int getPlayersInGame() {
@@ -30,7 +29,6 @@ public class game {
                 if(player.gracze[i].hand.isEmpty() && !player.gracze[i].won) {
                     player.gracze[i].won = true;
                     player.decreasePlayersInGameValue();
-                    getPlayersInGame();
                     
                     System.out.println("Gracz " + i + " pozbył się kart!");
                 }
@@ -48,9 +46,8 @@ public class game {
     
     public static void playGame() {
         table.setStackCard(); //no parameters means random
-        
-        getPlayersInGame();
-        while (playersInGame >= 2) {
+
+        while (getPlayersInGame() >= 2) {
             
             kolejka(player.gracze);
             
