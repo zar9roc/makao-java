@@ -16,7 +16,7 @@ public class game {
         return player.getPlayersInGame();
     }
     
-    static public void kolejka(player.PlayerC gracze[]) {
+    static public void kolejka(player.PlayerC gracze[]) { //tutaj chyba jest bug
         System.out.println("kolejka gracza: " + turnPlayer);
         
         //ruch gracza

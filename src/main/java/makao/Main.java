@@ -31,18 +31,11 @@ Licznik tur
 package makao;
 
 import java.util.Random;
-//import java.io.IOException;
-import java.util.Scanner;
-
-
-
-
 
 public class Main {
    
-    static public Random random = new Random();
-    static public Scanner sc = new Scanner(System.in); 
-
+    static public Random random = new Random(); //potencjalny kandydat do przeprowadzki
+    
     public static void main(String[] args) {
         
         player.setStartingHand(5);
