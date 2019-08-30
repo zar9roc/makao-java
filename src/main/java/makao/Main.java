@@ -38,7 +38,8 @@ public class Main {
     
     public static void main(String[] args) {
         
-        player.setStartingHand(5);
+        System.out.println(random.nextInt());
+    	player.setStartingHand(5);
         player.setPlayersNum(4);
         game.playGame();
 
