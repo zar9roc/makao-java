@@ -1,10 +1,44 @@
-Pokój:
-    Ludzie: mogą trzymać karty, rzucać karty, patrzyć w karty, pobierać karty, wygrywać
-    Stół: można położyć i wziąć z niego karty, ma 2 stosy, karty położone i karty zakryte
-        Karty: jest ich nieskończoność, można je dobierać
-            karta:można rzucić, wziąć do ręki. Ma kolor i figurę
-                dama
-                król //działa tak a tak
-                jopek
-                itd.
-                
+
+SOL
+
+##LIB OD DZIAŁANIA KART
+
+2 każe brać 2 karty
+3 każe brać 3 karty
+4 każe opuścić kolejkę
+J żąda figury
+Q nic nie robi
+Q<3 anuluje nakaz 2,3,4,K
+K każe brać 5 kart
+A zmienia kolor
+
+##KLASY
+
+jest stos kart (w grze na 52 karty)
+jest stos grających
+
+##MAIN
+
+--Initial
+
+podaj liczbe graczy()
+rozdaj karty(po 5, dla n graczy)
+wylosuj kartę startową {
+    efekty karty nie działają
+}
+wybierz pierwszego gracza
+
+--Gra zasadnicza
+
+pętla (while liczba graczy > 1):{ 
+    rusza się kolejny gracz
+    pozwol na dobranie karty //równocześnie z punktem wyżej
+        rozpatrz efekty
+    odejmij graczy bez kart
+    }
+
+--Koniec Gry
+    
+    drukuj (gracz x przegrał)
+    
+    rozdaj ponownie()
