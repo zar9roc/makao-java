@@ -77,4 +77,8 @@ public class table {
                     //+karta!
                         //(makao)
     }
+    
+    static public int giveCard() {
+    	return Main.random.nextInt() % 52;
+    }
 }

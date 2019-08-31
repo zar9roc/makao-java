@@ -35,6 +35,7 @@ import java.util.Random;
 public class Main {
    
     static public Random random = new Random(); //potencjalny kandydat do przeprowadzki
+    int a = 0;
     
     public static void main(String[] args) {
         
@@ -42,6 +43,5 @@ public class Main {
     	player.setStartingHand(5);
         player.setPlayersNum(4);
         game.playGame();
-
     }
 }

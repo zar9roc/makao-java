@@ -5,6 +5,8 @@
  */
 package makao;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author adam
@@ -52,6 +54,20 @@ public class game {
             kolejka(player.gracze);
             
             checkWinCondition();
+        }
+    }
+    
+    static public void setPlayersNum(int val) {
+        playersNum = val;
+        setPlayersInGame(val);
+        
+        gracze = new PlayerC[val];
+        
+        for(int i = val; --i >= 0 ;) {
+            gracze[i] = new PlayerC();
+            gracze[i].hand = new ArrayList<>();
+            
+            card.givePlayersCards(i, startingHand);
         }
     }
 }
