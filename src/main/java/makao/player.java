@@ -37,13 +37,35 @@ public class player {
     
     public int[] playCard (int[] indexes) {
     	int[] playedCards = new int[indexes.length];
-    	
+    	int[] sortedIndexes = new int[indexes.length];
+        
+        //indeks -> karta
     	for (int i=indexes.length ; --i>=0 ; ){
     		playedCards[i] = hand.get(indexes[i]);
     	}
-    	for (int i=indexes.length ; --i>=0 ; ){
-    		hand.remove(indexes[i]);
-    	}
+        
+        //sortowanie indeksów malejąco
+        for (int i = indexes.length; --i >= 0; ) {
+            
+            int highestIndex = -1;
+            
+            for (int j = indexes.length; --j >=0 ; ) {
+                if (highestIndex < indexes[j]) 
+                    highestIndex = indexes[j];
+            }
+            for (int j = indexes.length; --j >= 0 ;) {
+                if (highestIndex == indexes[j]) {
+                    indexes[j] = -1;
+                    break;
+                }
+            }
+            
+            sortedIndexes[i] = highestIndex;
+        }
+        
+        //usuwanie kart z ręki po indeksach
+    	for (int i=sortedIndexes.length ; --i>=0 ; ) {hand.remove(sortedIndexes[i]); }
+    	
     	return playedCards;
     }
     

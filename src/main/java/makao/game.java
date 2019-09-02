@@ -14,6 +14,14 @@ import java.util.ArrayList;
 public class game {
     private static int turnPlayer;
     
+    public static player[] gracze;
+    public static int topCard;
+    //*instancja talii kart
+    
+//    public static table[]
+    
+    
+    
     private static int getPlayersInGame() {
         return player.getPlayersInGame();
     }
@@ -57,17 +65,16 @@ public class game {
         }
     }
     
-    static public void setPlayersNum(int val) {
-        playersNum = val;
-        setPlayersInGame(val);
+    static public void init(int numberOfPlayers, int numberOfStartingHand) {
         
-        gracze = new PlayerC[val];
-        
-        for(int i = val; --i >= 0 ;) {
-            gracze[i] = new PlayerC();
+        gracze = new player[numberOfPlayers];
+        for(int i = numberOfPlayers; --i >= 0; ) {
+            gracze[i] = new player();
             gracze[i].hand = new ArrayList<>();
             
-            card.givePlayersCards(i, startingHand);
+            gracze[i].drawCard(numberOfStartingHand);
         }
+        
+        topCard = table.getRandomCard();
     }
 }

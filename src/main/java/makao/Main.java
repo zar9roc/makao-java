@@ -40,8 +40,8 @@ public class Main {
     public static void main(String[] args) {
         
         System.out.println(random.nextInt());
-    	player.setStartingHand(5);
-        player.setPlayersNum(4);
+        
+        game.init(4, 5); //dla 4 graczy rozdaj po 5 kart
         game.playGame();
     }
 }

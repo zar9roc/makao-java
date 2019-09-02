@@ -14,9 +14,8 @@ import java.util.Scanner;
 public class table {
     private static int stack;
     
-    public static void setStackCard() {
-        stack = Main.random.nextInt() % 52;
-        System.out.println("Na startowa karte wylosowano: " + card.getCardName(stack));
+    public static int getRandomCard() {
+        return Main.random.nextInt() % 52;
     }
     
     public static void setStackCard(int playerCard) {
