@@ -41,15 +41,8 @@ public class game {
     
 
     static public void ruch(player gracz) {
-        //wydrukuj rękę
-        System.out.println("Dostepne nastepujace karty:");
-        
-        for(int i = gracz.hand.size(); --i >= 0; ) {
-            System.out.print(card.getCardName(i) + " ");
-        }
-        
-        System.out.println();
-        
+
+
         if(gracz.tury > 0) {
             gracz.tury--;
 
@@ -152,11 +145,12 @@ public class game {
     }
     
     public static void playGame() {
-        
- 
         while (getPlayersInGame() >= 2) {
-            
-            gracze[turnOfPlayer].playCard(getPlayerSelection());
+            if (gracze[turnOfPlayer].tury > 0){
+                gracze[turnOfPlayer].tury--; //zrobić z tego metodę?
+                inputOutput.outStunned(gracze[turnOfPlayer].tury);
+            }
+            else gracze[turnOfPlayer].playCard(getPlayerSelection());
             checkWinCondition();
             nextPlayer();
         }

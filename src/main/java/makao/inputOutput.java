@@ -92,6 +92,7 @@ public class inputOutput {
     public static int inSelectCard() {
         int index = 0;
         //TODO: dodać skaner
+        Scanner sc = new Scanner(System.in);
         return index;
     }
     
@@ -128,6 +129,12 @@ public class inputOutput {
     public static void outErrIncompatibile(int was) {
         
         System.out.println("Mozesz polozyc albo " + toColor(was / 13) + " albo " + toFigure(was % 13) + "!");
+    }
+    
+    //gracz x traci turę, zostało mu x kolejek/wchodzi do gry
+    public static void outStunned(int times) {
+        System.out.println("Gracz " + game.turnOfPlayer + " pominiety.");
+        System.out.println("Zostalo mu jeszcze " + times + " kolejek.");
     }
     
     //gracz x wygrał
