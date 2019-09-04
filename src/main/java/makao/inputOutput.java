@@ -124,10 +124,25 @@ public class inputOutput {
     }
     
     //gracz 1 ma x kart, gracz 2 ma x kart ,...
+    public static void outPlayersCardsAmount() {
+        int playerCount = game.gracze.length;
+        for(int i = 0; i < playerCount; i++) {
+            if(game.gracze[i].won) System.out.println("Gracz " + i + " juz wygral.");
+            else {
+                System.out.print("Gracz " + i + " ma " + game.gracze[i].hand.size() + " kart");
+                if (game.gracze[i].tury > 0) System.out.println(" i stoi jeszcze " + game.gracze[i].tury + " kolejek.");
+                else System.out.println('.');
+            }   
+        }
+    }
+    
     //na stole leży [karta]
+    public static void outCurrentCard(int id) {
+        System.out.println("Na stole lezy " + toFigure(id % 13) + toColor(id / 13));
+    }
+    
     //niepasująca karta
     public static void outErrIncompatibile(int was) {
-        
         System.out.println("Mozesz polozyc albo " + toColor(was / 13) + " albo " + toFigure(was % 13) + "!");
     }
     
@@ -138,8 +153,19 @@ public class inputOutput {
     }
     
     //gracz x wygrał
+    public static void outPlayerWon(int id) {
+        System.out.println("Gracz " + id + " pozbyl sie swojej ostatniej karty i wygral.");
+    }
+    
     //gracz x przegrał
+    public static void outPlayerLose(int id) {
+        System.out.println("Gracz " + id + " przegral!");
+    }
+    
     //gracz x zmienia kolor na
+    public static void outChangeColor(int player, int color) {
+        System.out.println("Gracz " + player + " koloru na " + toColor(color));
+    }
     
     
    
