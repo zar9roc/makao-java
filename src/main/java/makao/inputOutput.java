@@ -90,9 +90,10 @@ public class inputOutput {
     //po ile kart rozdać?
     //zagraj karte lub dobierz
     public static int inSelectCard() {
-        int index = 0;
+        int index;
         //TODO: dodać skaner
         Scanner sc = new Scanner(System.in);
+        index = sc.nextInt();
         return index;
     }
     
@@ -120,6 +121,7 @@ public class inputOutput {
     //podaj indeks karty (a-z)
     public static void outCardRequest() {
         System.out.println("Wybierz karte (0-" + (game.gracze[game.turnOfPlayer].hand.size() - 1) + ")");
+        System.out.println("Wpisz -1 aby pobrac karte lub zakonczyc wybor.");
         
     }
     

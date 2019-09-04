@@ -81,15 +81,13 @@ public class game {
     
     
     public static void checkWinCondition() {
-        /*
         for(int i = player.getPlayersNum(); --i >= 0; ) {
-                if(player.gracze[i].hand.isEmpty() && !player.gracze[i].won) {
-                    player.gracze[i].won = true;
-                    player.decreasePlayersInGameValue();
-                    
-                    System.out.println("Gracz " + i + " pozbył się kart!");
-                }
-            } */
+            if(gracze[i].hand.isEmpty() && !gracze[i].won) {
+                gracze[i].won = true;
+                player.decreasePlayersInGameValue();
+                inputOutput.outPlayerWon(i);
+            }
+        }
     }
     
     public static void nextPlayer() {
@@ -100,27 +98,29 @@ public class game {
     public static boolean possibleToPut(int askCard, int cardBefore) {
         boolean q;
 
-        q = cardBefore % 13 == askCard % 13 || cardBefore / 13 == askCard / 13;
+        q = cardBefore % 13 == gracze[turnOfPlayer].hand.get(askCard) % 13 
+            || cardBefore / 13 == gracze[turnOfPlayer].hand.get(askCard) / 13;
         
         return q;
     }
 
     public static ArrayList<Integer> playerSelection() {
         ArrayList<Integer> selection = new ArrayList<>();
-        int input;
+        int input = -2;
         int cardBefore = topCard;
         boolean complete = false;
         
         inputOutput.outCardRequest();
         
         while(!complete) {
-            input = inputOutput.inSelectCard();
+            while(input >= gracze[turnOfPlayer].hand.size() || input < -1) input = inputOutput.inSelectCard();
             if (input == -1) complete = true;
             else if (possibleToPut(input,cardBefore)) {
                 selection.add(input);
                 cardBefore = input;
             }
             else inputOutput.outErrIncompatibile(cardBefore);
+            input = -2;
         }
         
         return selection;
