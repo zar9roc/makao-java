@@ -104,18 +104,30 @@ public class game {
             turnOfPlayer++;
         }
     }
-    
+    public static boolean possibleToPut(int askCard, int cardBefore) {
+        boolean q;
+
+        q = cardBefore % 13 == askCard % 13 || cardBefore / 13 == askCard / 13;
+        
+        return q;
+    }
 
     public static ArrayList<Integer> playerSelection() {
         ArrayList<Integer> selection = new ArrayList<>();
-        int input = 0;
+        int input;
+        int cardBefore = topCard;
         boolean complete = false;
+        
         inputOutput.outCardRequest();
         
         while(!complete) {
             input = inputOutput.inSelectCard();
             if (input == -1) complete = true;
-            else selection.add(input);
+            else if (possibleToPut(input,cardBefore)) {
+                selection.add(input);
+                cardBefore = input;
+            }
+            else inputOutput.outErrIncompatibile(cardBefore);
         }
         
         return selection;

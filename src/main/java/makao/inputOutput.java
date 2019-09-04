@@ -5,7 +5,7 @@
  */
 package makao;
 
-import java.util.ArrayList;
+
 import java.util.Scanner;
 
 /**
@@ -13,6 +13,77 @@ import java.util.Scanner;
  * @author adam
  */
 public class inputOutput {
+    public static String toColor(int colNum) {
+        String col;
+        switch(colNum) {
+            case 0:
+                col = "serca";
+                break;
+            case 1:
+                col = "poduszki";
+                break;
+            case 2:
+                col = "trefle";
+                break;
+            case 3:
+                col = "wina";
+                break;
+            default: col = "err";
+        }
+        
+        return col;
+    }
+    
+    public static char toFigure(int figNum) {
+        char fig;
+        
+        switch(figNum) {
+            case 0:
+                fig = 'A';
+                break;
+            case 1:
+                fig = '2';
+                break;
+            case 2:
+                fig = '3';
+                break;
+            case 3:
+                fig = '4';
+                break;
+            case 4:
+                fig = '5';
+                break;
+            case 5:
+                fig = '6';
+                break;
+            case 6:
+                fig = '7';
+                break;
+            case 7:
+                fig = '8';
+                break;
+            case 8:
+                fig = '9';
+                break;
+            case 9:
+                fig = 'D';
+                break;
+            case 10:
+                fig = 'J';
+                break;
+            case 11:
+                fig = 'Q';
+                break;
+            case 12:
+                fig = 'K';
+                break;
+            default: 
+                fig = 'E';
+        }
+        return fig;
+    }
+    
+    
     //input
     
     //ilu graczy?
@@ -20,7 +91,7 @@ public class inputOutput {
     //zagraj karte lub dobierz
     public static int inSelectCard() {
         int index = 0;
-        //dodać skaner
+        //TODO: dodać skaner
         return index;
     }
     
@@ -54,6 +125,11 @@ public class inputOutput {
     //gracz 1 ma x kart, gracz 2 ma x kart ,...
     //na stole leży [karta]
     //niepasująca karta
+    public static void outErrIncompatibile(int was) {
+        
+        System.out.println("Mozesz polozyc albo " + toColor(was / 13) + " albo " + toFigure(was % 13) + "!");
+    }
+    
     //gracz x wygrał
     //gracz x przegrał
     //gracz x zmienia kolor na
