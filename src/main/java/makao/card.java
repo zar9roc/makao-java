@@ -77,13 +77,7 @@ public class card {
         return name;
     }
     
-    static public void givePlayersCards(int playerId, int quantity) {
-        
-        for (int j = quantity; --j >= 0; ) {
-            player.gracze[playerId].hand.add(Main.random.nextInt() % 52);
-        }
-    }
-    
+
     static public void AccumulateCharge(int val) {
         //accumulate 5 cards
     }

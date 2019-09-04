@@ -6,12 +6,24 @@
 package makao;
 
 import java.util.ArrayList;
+/*
+Gracze mają podzbiór graczy grających (reszta już wygrała)
+Gdy zostanie jeden gracz grający, gra się kończy
+Gracz ma ruch
+    Rzucić kartę
+    Pobrać kartę
+Po każdej akcji przychodzi kolej na na stępnego gracza
+    Jeżeli gra nakazuje graczowi pobrać karty, ten może się bronić
+        (czyli podbijanie kart)
+    Jeżeli gracz nie może podbić karty, może rzucić damę kier. 
+    Jeżeli gracz nie może lub nie chce podbijać karty, 
+        pobiera ustaloną ilość kart (albo stoi ustaloną ilość kolejek)
 
-
+ */
 public class player {
     
-    static private int playersNum = 0;
-    static private int playersInGame = 0;
+    static private int playersNum;
+    static private int playersInGame;
     
     //public String name;
     public ArrayList<Integer> hand; //52,21,37,12
@@ -31,11 +43,18 @@ public class player {
         playersInGame--;
     }
     
+    static public void setPlayersNum(int playersNumber) {
+        playersNum = playersNumber;
+        setPlayersInGame(playersNumber);
+    }
+    
     static public int getPlayersNum() {
         return playersNum;
     }
     
-    public int[] playCard (int[] indexes) {
+    
+    
+    public int[] playCard (Integer[] indexes) {
     	int[] playedCards = new int[indexes.length];
     	int[] sortedIndexes = new int[indexes.length];
         
