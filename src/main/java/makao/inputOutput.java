@@ -86,8 +86,10 @@ public class inputOutput {
     
     //input
     
-    //ilu graczy?
-    //po ile kart rozdać?
+    //*ilu graczy?
+    
+    //*po ile kart rozdać?
+    
     //zagraj karte lub dobierz
     public static int inSelectCard() {
         int index;

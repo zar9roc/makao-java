@@ -1,22 +1,19 @@
 /*
 TODO:
 
-Tłumaczenie cyfr na wartości kart
+Rozwinąć skutek player.playCard
+    (zaprogramować funkcje w card.java)
 
-Zaprogramować ruch gracza
-    
-    użyć biblioteki wejścia, 
-    zinterpretować parametry wejścia
-Zaprogramować prawo kładzenia kart
-    Rzucanie wielu kart
+~Zaprogramować prawo kładzenia kart
++    Rzucanie wielu kart
     Opcja Makao
-    Opcja PobórKarty
++    Opcja PobórKarty
     Naliczanie kary
-        Masowy pobór kart
++        Masowy pobór kart
     Uniewinnienie/DamaNaWszystko
     !Walet
     AS
-    Card interpretation, basic turn logic
+~    Card interpretation, basic turn logic
 
 Napisać działanie kart
 

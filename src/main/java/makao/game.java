@@ -7,8 +7,6 @@ package makao;
 
 import java.util.ArrayList;
 
-import java.util.Scanner;
-
 //ciekawostka
 //import static makao.table.Interpretuj;
 
@@ -38,47 +36,11 @@ public class game {
     public static int topCard;
     
     //*instancja talii kart
-    
 
-    static public void ruch(player gracz) {
-
-
-        if(gracz.tury > 0) {
-            gracz.tury--;
-
-        } else {
-            int wybor;
-            //wybor = System.in.read();
-            //czekaj na wybor
-            
-            Scanner sc = new Scanner(System.in);
-            
-            String userInput =  sc.nextLine();
-            
-            wybor = table.Interpretuj(userInput);
-            
-            card.used(wybor);
-            
-        }
-            
-        
-        //czy gracz ma kolejki: nie
-            //posłuchaj wyboru
-                //karta
-                    //(makao)
-                //pobór
-                    //+karta!
-                        //(makao)
-    }
-    
-    
-    
     
     private static int getPlayersInGame() {
         return player.getPlayersInGame();
     }
-    
-    
     
     public static void checkWinCondition() {
         for(int i = player.getPlayersNum(); --i >= 0; ) {
@@ -95,11 +57,13 @@ public class game {
             turnOfPlayer++;
         }
     }
-    public static boolean possibleToPut(int askCard, int cardBefore) {
+    public static boolean possibleToPut(int askCard, int cardBefore, boolean isItFirstCard) {
         boolean q;
-
-        q = cardBefore % 13 == gracze[turnOfPlayer].hand.get(askCard) % 13 
-            || cardBefore / 13 == gracze[turnOfPlayer].hand.get(askCard) / 13;
+        if(isItFirstCard)
+            q = cardBefore % 13 == gracze[turnOfPlayer].hand.get(askCard) % 13 
+                || cardBefore / 13 == gracze[turnOfPlayer].hand.get(askCard) / 13;
+        
+        else q = cardBefore % 13 == gracze[turnOfPlayer].hand.get(askCard) % 13;
         
         return q;
     }
@@ -115,7 +79,7 @@ public class game {
         while(!complete) {
             while(input >= gracze[turnOfPlayer].hand.size() || input < -1) input = inputOutput.inSelectCard();
             if (input == -1) complete = true;
-            else if (possibleToPut(input,cardBefore)) {
+            else if (possibleToPut(input,cardBefore,selection.isEmpty())) {
                 selection.add(input);
                 cardBefore = input;
             }
