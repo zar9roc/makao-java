@@ -34,6 +34,7 @@ public class game {
     public static player[] gracze;
     public static int turnOfPlayer;
     public static int topCard;
+    public static int charge = 0;
     
     //*instancja talii kart
 
@@ -59,7 +60,20 @@ public class game {
     }
     public static boolean possibleToPut(int askCard, int cardBefore, boolean isItFirstCard) {
         boolean q;
-        if(isItFirstCard)
+        
+        
+        if(charge > 0) {
+            q = (cardBefore / 13 == gracze[turnOfPlayer].hand.get(askCard) / 13 //taki sam kolor co karta poprzednia
+                    && 
+                    (
+                        gracze[turnOfPlayer].hand.get(askCard) % 13 != 3 //nierówna 4
+                        || gracze[turnOfPlayer].hand.get(askCard) % 13 == 1 //ale równa 2
+                        || gracze[turnOfPlayer].hand.get(askCard) % 13 == 2 //lub 3
+                        || gracze[turnOfPlayer].hand.get(askCard) % 13 == 12 //lub K
+                    ) 
+                    || gracze[turnOfPlayer].hand.get(askCard) % 13 == cardBefore % 13); //lub taka sama karta, co ostatnia położona - dowolny kolor
+        }
+        else if(isItFirstCard)
             q = cardBefore % 13 == gracze[turnOfPlayer].hand.get(askCard) % 13 
                 || cardBefore / 13 == gracze[turnOfPlayer].hand.get(askCard) / 13;
         
@@ -68,6 +82,7 @@ public class game {
         return q;
     }
 
+    
     public static ArrayList<Integer> playerSelection() {
         ArrayList<Integer> selection = new ArrayList<>();
         int input = -2;
@@ -90,22 +105,15 @@ public class game {
         return selection;
     }
     
-    public static Integer[] getPlayerSelection() {
-        
-        
-        
+    public static ArrayList<Integer> getPlayerSelection() {
+
         inputOutput.outPlayerHand(turnOfPlayer);
         
         //game.gracze[turnOfPlayer]
-        
-        
+
         ArrayList<Integer>  selection = playerSelection();
-        
-        
-        Integer[] selectionArray = new Integer[selection.size()];
-        selectionArray = selection.toArray(selectionArray);
-        
-        return selectionArray;
+
+        return selection;
     }
     
     public static void playGame() {
@@ -114,7 +122,18 @@ public class game {
                 gracze[turnOfPlayer].tury--; //zrobić z tego metodę?
                 inputOutput.outStunned(gracze[turnOfPlayer].tury);
             }
-            else gracze[turnOfPlayer].playCard(getPlayerSelection());
+            else {
+                ArrayList<Integer> selection = getPlayerSelection();
+                
+                if(selection.isEmpty()) gracze[turnOfPlayer].drawCard(1);
+                
+                else {
+                    Integer[] selectionArray = new Integer[selection.size()];
+                    selectionArray = selection.toArray(selectionArray);
+        
+                    gracze[turnOfPlayer].playCard(selectionArray);
+                }
+            }
             checkWinCondition();
             nextPlayer();
         }
@@ -122,7 +141,7 @@ public class game {
     
     static public void init(int numberOfPlayers, int numberOfStartingHand) {
         
-        gracze = new player[numberOfPlayers];
+        gracze = new player[numberOfPlayers];                            
         for(int i = numberOfPlayers; --i >= 0; ) {
             gracze[i] = new player();
             gracze[i].hand = new ArrayList<>();
