@@ -13,18 +13,11 @@ public class card {
 
     static public void AccumulateCharge(int val) {
         //accumulate 5 cards
+        game.charge += val;
     }
     
     static public void RestrictNextCard(int card) {
         //figures or colors
-    }
-    
-    static public void WarnFreeze() {
-        
-    }
-    
-    static public void WarnStack() {
-        
     }
     
     static public void RequestFig() {
@@ -36,34 +29,26 @@ public class card {
     }
     
     static public void used(int card) {
-        if(card == 11) {
-          //queenHeart();
-        } else {
-            int figure = card % 13;
-            switch (figure) {
-                case 12: //king
-                    AccumulateCharge(5);
-                    WarnStack();
-                    break;
-                case 10: //jopek
-                    RequestFig();
-                    break;
-                case 3: //4
-                    AccumulateCharge(1);
-                    WarnFreeze();
-                    break;
-                case 2: //3
-                    AccumulateCharge(3);
-                    WarnStack();
-                    break;
-                case 1: //2
-                    AccumulateCharge(2);
-                    WarnStack();
-                    break;
-                case 0: //Ace
-                    RequestColor();
-                    break;
-            }
+        int figure = card % 13;
+        switch (figure) {
+            case 12: //king
+                AccumulateCharge(5);
+                break;
+            case 10: //jopek
+                RequestFig();
+                break;
+            case 3: //4
+                AccumulateCharge(1);
+                break;
+            case 2: //3
+                AccumulateCharge(3);
+                break;
+            case 1: //2
+                AccumulateCharge(2);
+                break;
+            case 0: //Ace
+                RequestColor();
+                break;
         }
     }
 }

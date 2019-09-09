@@ -29,8 +29,7 @@ import java.util.ArrayList;
  * @author adam
  */
 public class game {
-    
-    
+
     public static player[] gracze;
     public static int turnOfPlayer;
     public static int topCard;
@@ -61,16 +60,19 @@ public class game {
     public static boolean possibleToPut(int askCard, int cardBefore, boolean isItFirstCard) {
         boolean q;
         
-        
-        if(charge > 0) {
+        if(gracze[turnOfPlayer].hand.get(askCard) == 11 || cardBefore == 11) {
+            q = true;
+            charge = 0;
+        } //dama na wszystko, wszystko na damę, zdjęte "charge"
+        else if(charge > 0) {
             q = (cardBefore / 13 == gracze[turnOfPlayer].hand.get(askCard) / 13 //taki sam kolor co karta poprzednia
                     && 
-                    (
-                        gracze[turnOfPlayer].hand.get(askCard) % 13 != 3 //nierówna 4
-                        || gracze[turnOfPlayer].hand.get(askCard) % 13 == 1 //ale równa 2
-                        || gracze[turnOfPlayer].hand.get(askCard) % 13 == 2 //lub 3
-                        || gracze[turnOfPlayer].hand.get(askCard) % 13 == 12 //lub K
-                    ) 
+                        (
+                            gracze[turnOfPlayer].hand.get(askCard) % 13 != 3 //nierówna 4
+                            || gracze[turnOfPlayer].hand.get(askCard) % 13 == 1 //ale równa 2
+                            || gracze[turnOfPlayer].hand.get(askCard) % 13 == 2 //lub 3
+                            || gracze[turnOfPlayer].hand.get(askCard) % 13 == 12 //lub K
+                        ) 
                     || gracze[turnOfPlayer].hand.get(askCard) % 13 == cardBefore % 13); //lub taka sama karta, co ostatnia położona - dowolny kolor
         }
         else if(isItFirstCard)
@@ -118,14 +120,20 @@ public class game {
     
     public static void playGame() {
         while (getPlayersInGame() >= 2) {
-            if (gracze[turnOfPlayer].tury > 0){
+            if (gracze[turnOfPlayer].tury > 0) {
                 gracze[turnOfPlayer].tury--; //zrobić z tego metodę?
                 inputOutput.outStunned(gracze[turnOfPlayer].tury);
             }
             else {
                 ArrayList<Integer> selection = getPlayerSelection();
                 
-                if(selection.isEmpty()) gracze[turnOfPlayer].drawCard(1);
+                if(selection.isEmpty()) {
+                    if(charge > 0) {
+                        if (topCard % 13 != 3) gracze[turnOfPlayer].drawCard(charge); //jeżeli jest obciążenie oraz karta na wierzchu nie jest 4
+                        else gracze[turnOfPlayer].tury = charge;
+                    }
+                    else gracze[turnOfPlayer].drawCard(1);
+                }
                 
                 else {
                     Integer[] selectionArray = new Integer[selection.size()];
