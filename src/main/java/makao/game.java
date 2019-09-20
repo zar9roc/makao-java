@@ -87,21 +87,23 @@ public class game {
     
     public static ArrayList<Integer> playerSelection() {
         ArrayList<Integer> selection = new ArrayList<>();
-        int input = -2;
+        int input;//= -2;
         int cardBefore = topCard;
         boolean complete = false;
         
         inputOutput.outCardRequest();
         
         while(!complete) {
-            while(input >= gracze[turnOfPlayer].hand.size() || input < -1) input = inputOutput.inSelectCard();
+            
+            input = inputOutput.inSelectCard();
+            
             if (input == -1) complete = true;
             else if (possibleToPut(input,cardBefore,selection.isEmpty())) {
                 selection.add(input);
                 cardBefore = input;
             }
             else inputOutput.outErrIncompatibile(cardBefore);
-            input = -2;
+            //input = -2;
         }
         
         return selection;

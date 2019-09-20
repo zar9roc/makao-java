@@ -92,10 +92,12 @@ public class inputOutput {
     
     //zagraj karte lub dobierz
     public static int inSelectCard() {
-        int index;
-        //TODO: dodać skaner
+        int index = -2;
+        
         Scanner sc = new Scanner(System.in);
-        index = sc.nextInt();
+        while(index >= game.gracze[game.turnOfPlayer].hand.size() || index < -1)
+            index = sc.nextInt();
+        
         return index;
     }
     
@@ -104,7 +106,24 @@ public class inputOutput {
     //gracz x żąda karty **
     //czego żądasz?
     //na co zmieniasz?
+    
+    public static int inColorChangeInput() {
+        int index = -1;
+        
+        Scanner sc = new Scanner(System.in);
+        while(index < 0 || index >= 4) {
+            index = sc.nextInt();
+        
+            if (index < 0 || index >= 4) 
+                System.out.println("Powtorz!");
+        }
+        
+        return index;
+    }
+    
+    
     //dodać następną kartę?
+    
     //**makao?
     
     
@@ -166,9 +185,14 @@ public class inputOutput {
         System.out.println("Gracz " + id + " przegral!");
     }
     
+    //wybierz kolor na ktory zmieniasz
+    public static void outChangeColorRequest() {
+        System.out.println("Podaj nr koloru, na ktory zmieniasz \n0 - serce, 1 - dzwonek, 2 - zoladz, 3 - wino");
+    }
+    
     //gracz x zmienia kolor na
     public static void outChangeColor(int player, int color) {
-        System.out.println("Gracz " + player + " koloru na " + toColor(color));
+        System.out.println("Gracz " + player + " zmienia kolor na " + toColor(color));
     }
     
     

@@ -36,8 +36,6 @@ public class Main {
     
     public static void main(String[] args) {
         
-        System.out.println(random.nextInt());
-        
         game.init(4, 5); //dla 4 graczy rozdaj po 5 kart
         game.playGame();
     }

@@ -3,6 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+//TODO: DZIAŁANIE ASA, DZIAŁANIE JOPKA
+
 package makao;
 
 /**
@@ -21,11 +24,14 @@ public class card {
     }
     
     static public void RequestFig() {
-        
+        //zostalo tylko to!
     }
     
     static public void RequestColor() {
-        
+        inputOutput.outChangeColorRequest();
+        int color = inputOutput.inColorChangeInput();
+        game.topCard = color * 13; //kolor asa zmienia się w kolor żądany, może trochę powodować zamieszanie
+        inputOutput.outChangeColor(game.turnOfPlayer ,color);
     }
     
     static public void used(int card) {
