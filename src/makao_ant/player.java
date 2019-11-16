@@ -85,7 +85,7 @@ public class player {
         //usuwanie kart z ręki po indeksach
     	for (int i=sortedIndexes.length ; --i>=0 ; ) {hand.remove(sortedIndexes[i]); }
     	
-    	return playedCards;
+    	return playedCards; //WTF Co ona zwraca
     }
     
     public void drawCard(int amount) {
