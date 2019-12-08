@@ -54,7 +54,7 @@ public class player {
     
     
     
-    public int[] playCard (Integer[] indexes) {
+    public int playCard (Integer[] indexes) {
     	int[] playedCards = new int[indexes.length];
     	int[] sortedIndexes = new int[indexes.length];
         
@@ -85,7 +85,7 @@ public class player {
         //usuwanie kart z ręki po indeksach
     	for (int i=sortedIndexes.length ; --i>=0 ; ) {hand.remove(sortedIndexes[i]); }
     	
-    	return playedCards; //WTF Co ona zwraca
+    	return playedCards[indexes.length - 1]; //WTF Co ona zwraca
     }
     
     public void drawCard(int amount) {

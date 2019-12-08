@@ -7,7 +7,7 @@ package makao_ant;
 
 
 
-/**
+/**git://
  *  Na stole jest talia kart zakrytych, oraz (jedna) aktualnie zagrana karta
  *  gracze biorą karty ze stosu, oraz rzucają karty z ręki, 
  *  zmieniając w ten sposób aktualnie zagraną kartę

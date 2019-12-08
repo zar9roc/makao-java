@@ -66,8 +66,10 @@ public class game {
     
     public static void nextPlayer() {
         turnOfPlayer++;
+        if(turnOfPlayer == gracze.length) turnOfPlayer = 0;
         while(turnOfPlayer == player.getPlayersNum() || gracze[turnOfPlayer].won) {
             turnOfPlayer++;
+            if(turnOfPlayer == gracze.length) turnOfPlayer = 0;
         }
     }
     public static boolean possibleToPut(int askCard, int cardBefore, boolean isItFirstCard) {
