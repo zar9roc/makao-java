@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package makao_ant;
+package makao.logic;
 
-
+import makao.makao;
 
 /**git://
  *  Na stole jest talia kart zakrytych, oraz (jedna) aktualnie zagrana karta
@@ -32,7 +32,7 @@ public class table {
     
     static public int giveCard() {
         int returnValue = -1;
-        while(returnValue < 0) returnValue = Makao_ant.random.nextInt();
+        while(returnValue < 0) returnValue = makao.random.nextInt();
         
     	return returnValue % 52; //xDDD, losowało ujemne wartości czasem
     }

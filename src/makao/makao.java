@@ -1,4 +1,4 @@
-package makao_ant;
+package makao;
 /*
 TODO:
 
@@ -29,14 +29,17 @@ Licznik tur
 
 import java.util.Random;
 
-public class Makao_ant {
+import makao.logic.game;
+
+public class makao {
    
     static public Random random = new Random(); //potencjalny kandydat do przeprowadzki
-    int a = 0;
-    
-    public static void main(String[] args) {
         
-        game.init(4, 5); //dla 4 graczy rozdaj po 5 kart
+    public static void main(String[] args) {
+        int numberOfPlayers = 4;
+        int numberOfPlayedCards = 5;
+        game.init(numberOfPlayers, numberOfPlayedCards); //dla 4 graczy rozdaj po 5 kart
         game.playGame();
+        
     }
 }

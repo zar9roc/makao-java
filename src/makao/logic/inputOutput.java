@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package makao_ant;
+package makao.logic;
 
 
 import java.util.Scanner;
@@ -94,10 +94,10 @@ public class inputOutput {
     public static int inSelectCard() {
         int index = -2;
         
-        Scanner sc = new Scanner(System.in); //heeej, przekazywanie wartości ułatwi znacznie testowanie jednostkowe!!!  -- walone java
+        Scanner sc = new Scanner(System.in); //heeej, przekazywanie wartości ułatwi znacznie testowanie jednostkowe!!!
         while(index >= game.gracze[game.turnOfPlayer].hand.size() || index < -1)
             index = sc.nextInt();
-        
+        sc.close();
         return index;
     }
     
@@ -116,7 +116,7 @@ public class inputOutput {
                 outChangeFigRequest();
             }
         }
-        
+        sc.close();
         return figure;
     }
     
@@ -134,7 +134,7 @@ public class inputOutput {
                 outChangeColorRequest();
             }
         }
-        
+        sc.close();
         return index;
     }
     

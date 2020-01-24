@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package makao_ant;
+package makao.logic;
 
 import java.util.ArrayList;
 /*
@@ -30,6 +30,13 @@ public class player {
     //public boolean makao = false;
     public int tury = 0;
     public boolean won = false;
+
+    public player(int startingCards) {
+        won = false;
+        tury = 0;
+        hand = new ArrayList<>();
+        drawCard(startingCards);
+    }
 
     static private void setPlayersInGame(int val) {
         playersInGame = val;

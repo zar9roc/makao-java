@@ -6,7 +6,7 @@
 
 //TODO: DZIAŁANIE ASA, DZIAŁANIE JOPKA
 
-package makao_ant;
+package makao.logic;
 
 /**
  *
